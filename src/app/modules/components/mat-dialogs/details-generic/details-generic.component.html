@@ -1,0 +1,52 @@
+<mat-dialog-content class="p-6 grid gap-4">
+    <div class="flex flex-row items-center justify-between mb-4">
+        <h2 class="text-lg text-green-950 font-medium">Detalles del correo</h2>
+        <i class="fa-solid fa-xmark text-red-500 text-4xl cursor-pointer" (click)="close()"></i>
+    </div>
+    <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-1">
+            <!-- <ul>
+                <li><strong>ID del mensaje:</strong></li>
+                <li *ngFor="let mailId of mail.mail['idsTo']">{{mailId}}</li>
+            </ul> -->
+
+            <p class="mb-2"><strong class="mr-2">ID:</strong> {{mail.mail.id_mail}}</p>
+            <p class="mb-2"><strong class="mr-2">Remitente:</strong> {{mail.mail.from}}</p>
+            <p class="mb-2"><strong class="mr-2">Receptor:</strong> {{mail.mail.to}} </p>
+
+
+            <p class="mb-2"><strong class="mr-2">Asunto:</strong> {{mail.mail.subject}}</p>
+        </div>
+        <div class="col-span-1">
+            <p class="mb-2 text-justify"><strong class="mr-2">Mensaje:</strong> {{mail.mail.message}}</p>
+        </div>
+    </div>
+    <h3 class="text-lg font-medium mb-4 text-blue-500">Detalles del análisis</h3>
+    <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-1">
+            <p class="mb-2">
+                <strong class="mr-2">Fecha del análisis:</strong>
+                {{mail.mail.dateOfReport.$date | date: 'yyyy/MM/dd'}}
+                {{mail.mail.dateOfReport.$date | date: 'HH:mm:ss'}}
+            </p>
+            <p class="mb-2"><strong class="mr-2">Predicción:</strong> {{mail.mail.prediction}}</p>
+            <p class="mb-2">
+                <strong class="mr-2">Archivos:</strong>
+                <span *ngIf="mail.mail.name_attachments.length === 0">
+                    No hay archivos
+                </span>
+            </p>
+            <ul class="list-disc list-inside mb-4">
+                <li *ngFor="let attachment of mail.mail.name_attachments">
+                    {{ attachment }}
+                </li>
+            </ul>
+        </div>
+        <div class="col-span-1">
+            <p class="mb-2"><strong class="mr-2">Ruta:</strong> {{mail.mail.path}}</p>            
+        </div>
+    </div>
+    <div class="flex justify-center gap-3" mat-dialog-actions>
+        <button mat-raised-button mat-dialog-close color="primary">Cerrar</button>
+    </div>
+</mat-dialog-content>

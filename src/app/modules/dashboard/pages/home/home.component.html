@@ -1,0 +1,102 @@
+<div class="h-full flex overflow-hidden text-sm ">
+
+  <app-menu></app-menu>
+
+  <div class="flex-grow overflow-hidden h-full flex flex-col">
+    <app-header class="flex-none" title="Dashboard"></app-header>
+    <div class="content overflow-y-auto">
+      <!-- CARDS -->
+      <app-cards></app-cards>
+
+      <!-- GRAPHICS -->
+      <hr class="border-gray-400 border-1 mt-5 mb-5">
+
+      <div class="grid grid-cols-1  md:grid-cols-4 gap-4">
+        <div class="col-span-2">
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <app-graphic-bar class="w-full h-full" [data1]="mailHam$" [data2]="mailSpam$"
+              title="Cantidad de correos spam y ham en los últimos 7 días" label1="Ham" label2="Spam" filter1="ham"
+              filter2="spam" color1="#22c55e" color2="#ea580c">
+            </app-graphic-bar>
+          </div>
+        </div>
+        <div class="col-span-2">
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <app-graphic-bar2>
+            </app-graphic-bar2>
+          </div>
+        </div>
+        <div class="col-span-2">
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <app-graphic-bar-day class="w-full h-full" [data1]="mailHam$" [data2]="mailSpam$"
+            title="Cantidad de correos spam y ham durante el día" label1="Ham" label2="Spam" filter1="ham"
+            filter2="spam" color1="#22c55e" color2="#ea580c">
+            </app-graphic-bar-day>
+          </div>
+        </div>
+        <div class="col-span-2">
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <app-graphic-bar2-day >
+            </app-graphic-bar2-day>
+          </div>
+        </div>
+        <div class="col-span-2">
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <app-graphic-bar-total class="w-full h-full" [data1]="mailHam$" [data2]="mailSpam$"
+              title="Cantidad total de correos spam y ham " label1="Ham" label2="Spam" filter1="ham"
+              filter2="spam" color1="#22c55e" color2="#ea580c">
+            </app-graphic-bar-total> 
+          </div>
+        </div>
+        <div class="col-span-2">
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <app-graphic-bar2-total></app-graphic-bar2-total>
+          </div>
+        </div>
+
+        <div class="col-span-2">
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <div class="bg-white p-4 rounded-lg shadow-md">
+              <app-list title="Usuarios que más envían spam" [listUsers$]="mailsFrom$"></app-list>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-span-2">
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <div class="bg-white p-4 rounded-lg shadow-md">
+              <app-list title="Usuarios que más reciben spam" [listUsers$]="mailsTo$"></app-list>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-span-2">
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <app-graphic-hroizontal-bar [listUsers$]="mailsFrom$" title="Cantidad de spam que envía cada usuario">
+            </app-graphic-hroizontal-bar>
+          </div>
+        </div>
+
+        <div class="col-span-2">
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <app-graphic-hroizontal-bar [listUsers$]="mailsTo$" title="Cantidad de spam que recibe cada usuario">
+            </app-graphic-hroizontal-bar>
+          </div>
+        </div>
+
+        <div class="col-span-2">
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <app-graphic-line class="w-full h-full"></app-graphic-line>
+          </div>
+        </div>
+
+        <div class="col-span-2">
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <app-graphic-circle class="w-full h-full "></app-graphic-circle>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

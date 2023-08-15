@@ -1,0 +1,65 @@
+
+ <div class="bg-gray-100 h-full flex overflow-hidden text-sm">
+  <app-menu></app-menu>
+  <div class="flex-grow overflow-hidden h-full flex flex-col">
+    <app-header class="flex-none" title="Reportes"></app-header>
+    <div class="content overflow-hidden min-h-full"> <!-- Agregamos "min-h-full" al contenedor principal -->
+      <div class="flex justify-center items-center h-full">
+        <div class="flex gap-5">
+          <button class="bg-red-500 text-white px-4 py-2 rounded-lg" (click)="generatePDF()">
+            <i class="fa-solid fa-file-pdf"></i>
+            Generar PDF
+          </button>
+          <button class="bg-green-500 text-white px-4 py-2 rounded-lg" (click)="generateExcel()">
+            <i class="fa-solid fa-file-excel"></i>
+            Generar EXCEL
+          </button>
+        </div>
+      </div>
+      
+      <div class="relative">
+        <ng-container *ngIf="(mailHam$ | async) as mailHam">
+          <ng-container *ngIf="(mailSpam$ | async) as mailSpam">
+            <app-graphic-bar 
+              id="graphic-bar" [data1]="mailHam$" [data2]="mailSpam$"
+              title="Cantidad de correos spam y ham en los últimos 7 días" label1="Ham" label2="Spam"
+              filter1="ham" filter2="spam" color1="#22c55e" color2="#ea580c"></app-graphic-bar>
+
+              <app-graphic-bar-day
+              id="graphic-bar-day" [data1]="mailHam$" [data2]="mailSpam$"
+              title="Cantidad de correos spam y ham detectados hoy" label1="Ham" label2="Spam"
+              filter1="ham" filter2="spam" color1="#22c55e" color2="#ea580c"></app-graphic-bar-day>
+
+              <app-graphic-bar-total
+              id="graphic-bar-total" [data1]="mailHam$" [data2]="mailSpam$"
+              title="Cantidad total spam y ham" label1="Ham" label2="Spam"
+              filter1="ham" filter2="spam" color1="#22c55e" color2="#ea580c"></app-graphic-bar-total>
+
+            <app-graphic-bar2 id="graphic-bar2"></app-graphic-bar2>
+            <app-graphic-bar2-day id="graphic-bar2-day"></app-graphic-bar2-day>
+            <app-graphic-bar2-total id="graphic-bar2-total"></app-graphic-bar2-total>
+
+            <app-graphic-hroizontal-bar 
+              id="graphic-hroizontal-bar-from"
+              [listUsers$]="mailsFrom$"
+              title="Cantidad de spam que envía cada usuario">
+            </app-graphic-hroizontal-bar>
+            <app-graphic-hroizontal-bar 
+              id="graphic-hroizontal-bar-to"
+              [listUsers$]="mailsTo$"
+              title="Cantidad de spam que recibe cada usuario">
+            </app-graphic-hroizontal-bar>
+            <app-graphic-circle id="graphic-circle">
+            </app-graphic-circle>
+            <app-graphic-line id="graphic-line"></app-graphic-line>
+
+          </ng-container>
+        </ng-container>
+        <div class="absolute inset-0 bg-gray-100" [class.hidden]="!showOverlay"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

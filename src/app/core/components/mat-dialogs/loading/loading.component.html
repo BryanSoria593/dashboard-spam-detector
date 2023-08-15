@@ -1,0 +1,14 @@
+<div class="flex flex-col items-center justify-center gap-6 loading-component">
+    <i class="{{message.logo}} {{message.color}} text-5xl"></i>
+    <div class="text-center">
+      <p class="font-semibold mb-2 flex flex-col">
+        <span>Cargando...</span>
+        <span>Esto puede tomar varios minutos</span>
+        <span>Por favor espere</span>
+        <span *ngIf="message.count !== 0">
+          {{message.count}}/{{message.length}}
+        </span>
+      </p>
+    </div>
+  </div>
+  

@@ -1,0 +1,109 @@
+<div class="flex flex-col items-center justify-center min-h-screen bg-slate-200">
+  <div class="w-full max-w-md">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <h2 class="text-2xl font-bold mb-4">Registro</h2>
+      <form (submit)="register()" [formGroup]="formRegister">
+        <div class="flex -mx-3">
+          <div class="w-full px-3 mb-5">
+            <label for="username" class="text-xs font-semibold px-1">Nombre de Usuario</label>
+            <div class="flex">
+              <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                <i class="fa-solid fa-user text-base"></i>
+              </div>
+              <input type="text" formControlName="username"
+                class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                placeholder="Nombre de usuario">
+            </div>
+            <mat-error class="error"
+              *ngIf="formRegister.get('username')?.touched && formRegister.get('username')?.hasError('required')">El
+              nombre de usuario es requerido</mat-error>
+          </div>
+        </div>
+
+        <div class="flex -mx-3">
+          <div class="w-full px-3 mb-5">
+            <label for="email" class="text-xs font-semibold px-1">Correo Electrónico</label>
+            <div class="flex">
+              <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                <i class="fa-solid fa-envelope text-base"></i>
+              </div>
+              <input type="email" formControlName="email"
+                class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                placeholder="Correo electrónico">
+            </div>
+            <mat-error class="error"
+              *ngIf="formRegister.get('email')?.touched && formRegister.get('email')?.hasError('required')">El
+              correo es requerido</mat-error>
+            <mat-error class="error"
+              *ngIf="formRegister.get('email')?.touched && formRegister.get('email')?.hasError('email')">El
+              formato del correo electrónico es inválido</mat-error>
+
+          </div>
+        </div>
+
+        <div class="flex -mx-3">
+          <div class="w-full px-3 mb-5">
+            <label for="password" class="text-xs font-semibold px-1">Contraseña</label>
+            <div class="flex">
+              <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                <i class="fa-solid fa-key text-base"></i>
+              </div>
+              <input type="password" formControlName="password"
+                class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                placeholder="Contraseña">
+            </div>
+            <mat-error class="error"
+              *ngIf="formRegister.get('password')?.touched && formRegister.get('password')?.hasError('required')">La
+              contraseña es requerida</mat-error>
+            <mat-error
+              *ngIf="formRegister.get('password')?.hasError('minlength') && formRegister.get('password')?.touched"
+              class="text-red-500 mt-2">
+              La contraseña debe tener al menos 8 caracteres
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="flex -mx-3">
+          <div class="w-full px-3 mb-8">
+            <label for="confirmPassword" class="text-xs font-semibold px-1">Repetir Contraseña</label>
+            <div class="flex">
+              <div class="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                <i class="fa-solid fa-key text-base"></i>
+              </div>
+              <input type="password" formControlName="confirmPassword"
+                class="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                placeholder="Repetir contraseña">
+            </div>
+            <div class="flex flex-col">
+              <mat-error class="error"
+                *ngIf="formRegister.get('confirmPassword')?.touched && formRegister.get('confirmPassword')?.hasError('required')">La
+                contraseña es requerida</mat-error>
+              <mat-error *ngIf="formRegister.hasError('notSame') && formRegister.touched" class="text-red-500 mt-2">
+                Las contraseñas no coinciden
+              </mat-error>
+              <mat-error *ngIf="formRegister.hasError('notPattern') && formRegister.touched" class="text-red-500 mt-2">
+                La nueva contraseña debe contener al menos una mayúscula, una minúscula, un número y un símbolo
+              </mat-error>
+            </div>
+          </div>
+        </div>
+        <div class="flex -mx-3">
+          <div class="w-full px-3 mb-5">
+              <div class="w-full px-3 mb-5">
+                <button [disabled]="formRegister.invalid"
+                    [ngClass]="{'bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700 ': formRegister.valid, 'bg-gray-500 cursor-not-allowed': formRegister.invalid}"
+                    class="block w-40 max-w-xs mx-aut text-white rounded-lg px-3 py-3 font-semibold">
+                    Registrarse</button>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="register pb-5">
+          ¿Ya tienes una cuenta? Inicia sesión <a class="text-blue-800" routerLink="/auth/">aquí</a>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

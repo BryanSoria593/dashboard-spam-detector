@@ -1,0 +1,105 @@
+<div class="h-full flex overflow-hidden text-sm ">
+
+  <app-menu></app-menu>
+  <div class="flex-grow overflow-hidden h-full flex flex-col">
+    <app-header class="flex-none" title="Editar perfil"></app-header>
+    <div class="content overflow-y-auto">
+      <div class="sm:m-10">
+        <div class="bg-white rounded-lg shadow-lg p-4 mb-8">
+          <h2 class="text-xl font-bold mb-4">Editar información del usuario</h2>
+          <form (submit)="updateProfile()" [formGroup]="formUpdateInfo">
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Nombre de Usuario</label>
+              <input formControlName="username" class="w-full bg-white rounded-md border border-gray-300 px-3 py-2"
+                type="text" id="username" name="username" placeholder="Ingresa tu nombre de usuario">
+              <mat-error class="error"
+                *ngIf="formUpdateInfo.get('username')?.touched && formUpdateInfo.get('username')?.hasError('required')">El
+                nombre de usuario es requerido</mat-error>
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Correo Electrónico</label>
+              <input formControlName="email" class="w-full bg-white rounded-md border border-gray-300 px-3 py-2"
+                type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico">
+              <mat-error class="error"
+                *ngIf="formUpdateInfo.get('email')?.touched && formUpdateInfo.get('email')?.hasError('required')">El
+                correo es requerido</mat-error>
+              <mat-error class="error"
+                *ngIf="formUpdateInfo.get('email')?.touched && formUpdateInfo.get('email')?.hasError('email')">El
+                formato del correo electrónico es inválido</mat-error>
+            </div>
+            <div class="mb-6">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="confirmPassword">Confirmar
+                Contraseña</label>
+              <input formControlName="password" class="w-full bg-white rounded-md border border-gray-300 px-3 py-2"
+                type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirma tu nueva contraseña">
+              <mat-error class="error"
+                *ngIf="formUpdateInfo.get('password')?.touched && formUpdateInfo.get('password')?.hasError('required')">La
+                contraseña es requerida</mat-error>
+            </div>
+            <div class="flex justify-end">              
+              <button [disabled]="formUpdateInfo.invalid"
+                [ngClass]="{'bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700 ': formUpdateInfo.valid, 'bg-gray-500 cursor-not-allowed': formUpdateInfo.invalid}"
+                class="block w-40 max-w-xs mx-aut text-white rounded-lg px-3 py-3 font-semibold">Actualizar</button>
+            </div>
+          </form>
+
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-4">
+          <form (submit)="updatePassword()" [formGroup]="formUpdatePassword">
+            <h2 class="text-lg font-bold mb-4">Editar Contraseña</h2>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="currentPassword">Contraseña Actual</label>
+              <input formControlName="currentPassword"
+                class="w-full bg-white rounded-md border border-gray-300 px-3 py-2" type="password" id="currentPassword"
+                name="currentPassword" placeholder="Ingresa tu contraseña actual">
+              <mat-error
+                *ngIf="formUpdatePassword.get('currentPassword')?.hasError('required') && formUpdatePassword.get('currentPassword')?.touched">
+                Este campo no puede estar vacío
+              </mat-error>
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="newPassword">Nueva Contraseña</label>
+              <input formControlName="newPassword" class="w-full bg-white rounded-md border border-gray-300 px-3 py-2"
+                type="password" id="newPassword" name="newPassword" placeholder="Ingresa tu nueva contraseña">
+            </div>
+            <div class="mb-6">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="confirmPassword">Confirmar
+                Contraseña</label>
+              <input formControlName="confirmPassword"
+                class="w-full bg-white rounded-md border border-gray-300 px-3 py-2" type="password" id="confirmPassword"
+                name="confirmPassword" placeholder="Confirma tu nueva contraseña">
+            </div>
+            <div class="flex justify-end">
+              <button [disabled]="formUpdatePassword.invalid"
+                [ngClass]="{'bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700 ': formUpdatePassword.valid, 'bg-gray-500 cursor-not-allowed': formUpdatePassword.invalid}"
+                class="block w-40 max-w-xs mx-aut text-white rounded-lg px-3 py-3 font-semibold">Actualizar contraseña</button>
+              
+            </div>
+            <div class="flex flex-col">
+              <mat-error
+                *ngIf="formUpdatePassword.get('newPassword')?.hasError('required') && formUpdatePassword.get('newPassword')?.touched"
+                class="text-red-500 mt-2">
+                La nueva contraseña es requerida
+              </mat-error>
+              <mat-error *ngIf="formUpdatePassword.hasError('notSame') && formUpdatePassword.touched"
+                class="text-red-500 mt-2">
+                Las contraseñas no coinciden
+              </mat-error>
+              <mat-error
+                *ngIf="formUpdatePassword.get('newPassword')?.hasError('minlength') && formUpdatePassword.get('newPassword')?.touched"
+                class="text-red-500 mt-2">
+                La nueva contraseña debe tener al menos 8 caracteres
+              </mat-error>
+              <mat-error *ngIf="formUpdatePassword.hasError('notPattern') && formUpdatePassword.touched"
+                class="text-red-500 mt-2">
+                La nueva contraseña debe contener al menos una mayúscula, una minúscula, un número y un símbolo
+              </mat-error>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

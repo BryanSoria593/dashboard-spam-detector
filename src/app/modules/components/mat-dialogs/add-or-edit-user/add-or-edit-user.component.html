@@ -1,0 +1,23 @@
+<mat-dialog-content>
+  <form [formGroup]="userForm" class="flex flex-col items-center w-full">
+    <mat-form-field color="accent" class="w-full">
+      <input matInput placeholder="Nombre de usuario" formControlName="username" required>
+    </mat-form-field>
+    
+    <mat-form-field color="accent" class="w-full mt-4">
+      <input matInput placeholder="Correo electrónico" formControlName="email" required>
+    </mat-form-field>
+
+    <section class="mt-8">      
+      <div class="example-button-row flex justify-center space-x-4">
+        <button *ngIf="showButtonAdd" mat-raised-button color="primary"
+                [disabled]="!userForm.valid" [mat-dialog-close]="true"
+                (click)="addUser()">Guardar</button>
+        <button *ngIf="showButtonEdit" mat-raised-button color="primary"
+                [disabled]="!userForm.valid || !isUpdated" [mat-dialog-close]="true"
+                (click)="updateUser()">Actualizar</button>
+        <button mat-raised-button color="warn" (click)="close()">Cancelar</button>
+      </div>
+    </section>
+  </form>
+</mat-dialog-content>

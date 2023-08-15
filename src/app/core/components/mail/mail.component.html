@@ -1,0 +1,82 @@
+<div [hidden]="hasData">
+    <div class="flex items-center p-4 m-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-blue-800 dark:text-blue-300"
+        role="alert">
+        <i class="flex-shrink-0 inline w-4 h-4 mr-3 fa-solid fa-circle-info" aria-hidden="true"></i>
+        <div class="">
+            Aún no se han reportados correos spam
+        </div>
+    </div>
+</div>
+
+
+<div [hidden]="!hasData">
+
+
+    <section class="shadow-md overflow-x-auto">
+
+        <div class="flex justify-between mb-4">
+            <mat-form-field appearance="standard" class="w-full">
+                <mat-label class="ml-5">Filtrar búsqueda</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ejemplo: spam" #input>
+            </mat-form-field>
+        </div>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-full">
+
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right;">ID de mensaje</th>
+                <td mat-cell *matCellDef="let row" class="text-xs">{{row.id_mail}}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="dateOfReport">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de análisis</th>
+                <td mat-cell *matCellDef="let row" class="text-xs">{{row.dateOfReport.$date | date: 'yyyy/MM/dd HH:mm:ss'}}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="to">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Remitente</th>
+                <td mat-cell *matCellDef="let row" class="text-xs">{{row.from}}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="from">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Destinatario</th>
+                <td mat-cell *matCellDef="let row" class="text-xs">{{row.to}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="subject">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Asunto</th>
+                <td mat-cell *matCellDef="let row" class="text-xs">{{row.subject}}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="prediction">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Predicción</th>
+                <td mat-cell *matCellDef="let row" class="text-xs">{{row.prediction}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+
+                <th mat-header-cell *matHeaderCellDef style="text-align: right;"> Actions </th>
+                <td mat-cell *matCellDef="let row">
+                    <div class="flex justify-end space-x-1">
+                        <button matTooltip="Ver los detalles" matTooltipClass="tooltip" (click)="openDetails(row)"
+                            class="text-x2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded ">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No hay coincidencias con "{{input.value}}"</td>
+            </tr>
+        </table>
+    </section>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [length]="(mails$ | async)?.length"
+        aria-label="Select page of users"></mat-paginator>
+</div>

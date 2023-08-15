@@ -1,0 +1,96 @@
+<section class="ml-4 mt-4 sm:hidden">
+	<i class="fa-solid fa-bars block text-lg" (click)="showMenu()"></i>
+</section>
+
+<section class="dark:border-gray-800 {{widthMenu}} {{showToggle}} flex-shrink-0 flex-col  sm:flex">
+	<div class="min-h-screen flex flex-row bg-gray-200 border-r shadow-sm">
+		<nav class="flex flex-col w-56 bg-white overflow-hidden">
+			<div class="{{paddingLogoSpam}} flex items-center">
+				<a class="flex flex-col items-center" routerLink="/dashboard/">
+					<img class="w-16 h-14 object-contain" src="/assets/img/logo.webp" alt="Logo del detector de spam">
+					<span class="{{hideWordsToMenu}} ml-2 font-bold text-gray-800">SpamDetector</span>
+				</a>
+				<div class="absolute {{marginArrowMenu}}">
+					<div class="h-5 w-6 rounded-full bg-indigo-500 flex items-center justify-center">
+						<i class="fa-solid {{logoArrow}} text-white text-sm" (click)="hideWords()"></i>
+					</div>
+				</div>
+			</div>
+			<ul class="flex flex-col">
+				<li>
+					<a [routerLink]="'/dashboard/'"
+						class="flex flex-row items-center pt-4 pb-4 focus:outline-none text-gray-600 border-l-4 border-transparent pr-6 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-800 hover:border-indigo-500">
+						<span class="inline-flex justify-center items-center ml-4">
+							<i class="fa-solid fa-chart-line"></i>
+						</span>
+						<span class="{{hideWordsToMenu}} ml-2 sm:text-[13px] text-[11px]">Dashboard</span>
+					</a>
+				</li>
+				<!-- <li>
+					<a [routerLink]="'/dashboard/history'"
+						class="flex flex-row items-center pt-4 pb-4 focus:outline-none text-gray-600 border-l-4 border-transparent pr-6 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-800 hover:border-indigo-500">
+						<span class="inline-flex justify-center items-center ml-4">
+							<i class="fa-solid fa-timeline text-xs"></i>
+						</span>
+						<span class="{{hideWordsToMenu}} ml-2 sm:text-[13px] text-[11px]">
+							Historial
+						</span>
+					</a>
+				</li> -->
+				<li>
+					<a [routerLink]="'/dashboard/history'"
+						class="flex flex-row items-center pt-4 pb-4 focus:outline-none text-gray-600 border-l-4 border-transparent pr-6 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-800 hover:border-indigo-500">
+						<span class="inline-flex justify-center items-center ml-4">
+							<i class="fa-solid fa-timeline text-xs"></i>
+						</span>
+						<span class="{{hideWordsToMenu}} ml-2 sm:text-[13px] text-[11px]">Historial</span>
+					</a>
+				</li>
+
+				<li>
+					<a [matMenuTriggerFor]="menu"
+						class="flex flex-row items-center pt-4 pb-4 focus:outline-none text-gray-600 border-l-4 border-transparent pr-6 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-800 hover:border-indigo-500 cursor-pointer">
+						<span class="inline-flex justify-center items-center ml-4">
+							<i class="fa-solid fa-filter"></i>
+						</span>
+						<span class="{{hideWordsToMenu}} ml-2 sm:text-[13px] text-[11px]">Filtros <i
+							class="fa-solid fa-caret-down ml-2"></i></span>
+					</a>
+
+					<mat-menu #menu="matMenu" xPosition="after">
+						<button mat-menu-item class="flex items-center" [routerLink]="'/dashboard/filter/whitelist'">
+							<i class="fa-solid fa-user-check mr-2 text-indigo-500"></i>
+							<span class="text-gray-800">Listas blancas</span>
+						</button>
+						<button mat-menu-item class="flex items-center" [routerLink]="'/dashboard/filter/blacklist'">
+							<i class="fa-solid fa-user-xmark mr-2 text-red-500"></i>
+							<span class="text-gray-800">Listas negras</span>
+						</button>
+					</mat-menu>
+				</li>
+				<li>
+					<a [routerLink]="'/dashboard/summary'"
+						class="flex flex-row items-center pt-4 pb-4 focus:outline-none text-gray-600 border-l-4 border-transparent pr-6 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-800 hover:border-indigo-500">
+						<span class="inline-flex justify-center items-center ml-4">
+							<i class="fa-solid fa-chart-column"></i>
+						</span>
+						<span class="{{hideWordsToMenu}} ml-2 sm:text-[13px] text-[11px]">Resumen</span>
+					</a>
+				</li>
+
+
+			</ul>
+			<div class="flex-grow"></div>
+
+			<div class="flex items-center mb-4" (click)="logout()">
+				<a [routerLink]="'/auth/'"
+					class="flex flex-row items-center pt-4 pb-4 focus:outline-none text-gray-600 border-l-4 border-transparent pr-6 transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-gray-800 hover:border-red-500">
+					<span class="inline-flex justify-center items-center ml-4">
+						<i class="fa-solid fa-right-from-bracket text-red-600"></i>
+					</span>
+					<span class="{{hideWordsToMenu}} ml-2 sm:text-[13px] text-[11px]">Salir</span>
+				</a>
+			</div>
+		</nav>
+	</div>
+</section>

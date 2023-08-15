@@ -1,0 +1,56 @@
+<!-- <div [hidden]="hasData">
+    <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4" role="alert">
+        <p class="font-bold">No se han detectado usuarios que envíen o reciban spam</p>
+    </div>
+</div> 
+
+ <div [hidden]="hasData" class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
+    <p class="font-bold">Informational message</p>
+    <p class="font-bold">No se han detectado usuarios que envíen o reciban spam</p>
+</div>
+
+ <div [hidden]="!hasData">  -->
+    <section class="overflow-x-auto">
+        <h2 class="text-xs font-bold mb-4 text-gray-600">{{title}}</h2>
+        <div class="flex justify-between mb-4">
+            <mat-form-field appearance="standard" class="w-full">
+                <mat-label class="text-xs ml-5">Filtrar búsqueda</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ejemplo: spam" #input>
+            </mat-form-field>
+        </div>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-full">
+            <ng-container matColumnDef="user">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</th>
+                <td mat-cell *matCellDef="let row" class="text-xs">
+                    {{row.user}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="cargo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cargo</th>
+                <td mat-cell *matCellDef="let row" class="text-xs">
+                    {{row.cargo}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="detection">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Detección</th>
+                <td mat-cell *matCellDef="let row" class="text-xs">
+                    {{row.detection}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="counts">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+                <td mat-cell *matCellDef="let row" class="text-xs">
+                    {{row.counts}}
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No hay coincidencias con "{{input.value}}"</td>
+            </tr>
+        </table>
+    </section>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [length]="(listUsers$ | async)?.length"
+  [pageSize]="countListUser" aria-label="Select page of users"></mat-paginator>
+
+ <!-- </div> -->

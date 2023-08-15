@@ -1,0 +1,48 @@
+<div class="h-full flex overflow-hidden text-sm">
+  <app-menu></app-menu>
+
+  <div class="flex-grow overflow-hidden h-full flex flex-col">
+    <app-header class="flex-none" title="Historial de mensajes"></app-header>
+    <div class="content overflow-y-auto">
+      <!-- <app-spinner *ngIf="(loading$ | async)"></app-spinner> -->
+
+      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+        <mat-tab label="Correos reportados">
+          <div style="position: relative;">
+            
+            <app-mail></app-mail>
+          </div>
+        </mat-tab>
+        
+        <!-- Remove the empty <div> here -->
+        
+        <mat-tab label="Correos detectados como spam hoy Día">
+          <div style="position: relative;">
+            <button (click)="generateExcelSpam()"
+              class="p-0 w-12 h-12 bg-green-500 rounded-full hover:bg-green-600 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+              style="position: fixed; bottom: 20px; right: 20px;"
+              aria-label="Excel icon button"
+            >
+              <i class="fa-solid fa-file-excel text-white text-xl"></i>
+            </button>        
+            <app-info-spam-ham [mails$]="mailsSpam$"></app-info-spam-ham>
+          </div>
+        </mat-tab>
+        
+        <mat-tab label="Correos detectados como ham hoy Día">
+          <div style="position: relative;">
+            <button (click)="generateExcelHam()"
+              class="p-0 w-12 h-12 bg-green-500 rounded-full hover:bg-green-600 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"
+              style="position: fixed; bottom: 20px; right: 20px;"
+              aria-label="Excel icon button"
+            >
+              <i class="fa-solid fa-file-excel text-white text-xl"></i>
+            </button>
+        
+            <app-info-spam-ham [mails$]="mailsHam$"></app-info-spam-ham>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class=" h-full flex overflow-hidden text-sm">
+
+  <app-menu></app-menu>
+
+  <div class="flex-grow overflow-hidden h-full flex flex-col">
+    <app-header class="flex-none" title="Usuarios en lista negra"></app-header>
+    <div class="content overflow-y-auto">
+      <div class="flex items-center p-4 m-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-800 dark:text-red-300"
+        role="alert">
+        <i class="flex-shrink-0 inline w-4 h-4 mr-3 fa-solid fa-triangle-exclamation"></i>
+        <div class="text-xs">          
+          Los usuarios registrados son aquellos que han sido identificados como spammers por el agente
+          y durante el próximo análisis se reenviarán sus mensajes a la bandeja de spam del usuario receptor
+        </div>
+      </div>
+      <app-list-filter [listUsers$]="blackList$" identifier="black"></app-list-filter>
+    </div>
+  </div>
+
+</div>
